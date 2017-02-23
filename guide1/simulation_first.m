@@ -3,7 +3,8 @@ N= 50; % Number of mobile nodes
 W= 40; % Radio range (in meters)
 S= 15; % Maximum speed (in Km/h)
 delta= 1; % Difference between consecutive time instants (in seconds)
-T= 3600; % No. of time instants of the simulation
+%T= 3600; % No. of time instants of the simulation
+T=3600;
 
 S= S/3.6; % Conversion of maximum speed to m/s
 results= zeros(1,T); % Initialization of the results array
@@ -24,7 +25,7 @@ for iter= 1:T
   hold on
   
   % Compute the node pairs with direct connections:
-  L= ConnectedList(N,pos,W);
+  #L= ConnectedList(N,pos,W);
   % Compute the no. of connected node pairs of time instant iter:
   #results(iter)= AverageConnectedNodePairs(N,L);
   % Update node coordinates and speed values:
