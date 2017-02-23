@@ -1,5 +1,5 @@
 %Parameters initialization:
-N= 150; % Number of mobile nodes
+N= 50; % Number of mobile nodes
 W= 40; % Radio range (in meters)
 S= 15; % Maximum speed (in Km/h)
 delta= 1; % Difference between consecutive time instants (in seconds)
@@ -17,14 +17,18 @@ axis([0 300 0 200])
 grid on
 % Simulation cycle running all time instants iter:
 for iter= 1:T
+  hold off
+  % Visualize updated node positions:
+  plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
+  axis([0 300 0 200])
+  hold on
+  
   % Compute the node pairs with direct connections:
   L= ConnectedList(N,pos,W);
   % Compute the no. of connected node pairs of time instant iter:
   #results(iter)= AverageConnectedNodePairs(N,L);
   % Update node coordinates and speed values:
   [pos,vel]= UpdateCoordinates(pos,vel,delta);
-  % Visualize updated node positions:
-  plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
   pause(0.01)
 end
 
