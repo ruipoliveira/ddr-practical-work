@@ -22,13 +22,17 @@ for i=2:lines
         connected(i,j) = sqrt( (ponto1(1,1)-ponto2(1,1))^2 + (ponto1(1,2)-ponto2(1,2))^2);
         if(connected(i,j) < W)
             %plot([ponto1(1,1) ponto2(1,1)],[ponto1(1,2) ponto2(1,2)])
-            draw_x = [ draw_x ; ponto1(1,1) ponto2(1,1)];
-            draw_y = [ draw_y ; ponto1(1,2) ponto2(1,2)];
+            draw_x = [ draw_x NaN ponto1(1,1) ponto2(1,1)];
+            draw_y = [ draw_y NaN ponto1(1,2) ponto2(1,2)];
         end
     end
 end
 
 L=sum(connected);
 plot(draw_x, draw_y); % plot is slow. do it only once
-
+%refresh(1);
+%connected
+%draw_x
+%draw_y
+%waitforbuttonpress
 end
