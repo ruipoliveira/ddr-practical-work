@@ -12,6 +12,7 @@ function L= ConnectedList(~ ,pos,W)
 
 [lines, ~] = size(pos);
 connected = zeros(lines,lines);
+connected(:) = W + 1;
 draw_x = [];
 draw_y = [];
 
@@ -28,7 +29,8 @@ for i=2:lines
     end
 end
 
-L=sum(connected);
+L=sum(sum(connected < W));
+
 plot(draw_x, draw_y); % plot is slow. do it only once
 %refresh(1);
 %connected
