@@ -5,12 +5,17 @@ S= 15; % Maximum speed (in Km/h)
 delta= 1; % Difference between consecutive time instants (in seconds)
 %T= 3600; % No. of time instants of the simulation
 T=3600;
+AP = 1; % No. of APs 1,2,3 e 4
 
 S= S/3.6; % Conversion of maximum speed to m/s
 results= zeros(1,T); % Initialization of the results array
 
 % Generation of initial coordinates, speed and direction of mobile nodes:
-[pos,vel]= InitialRandom(N,S);
+[pos,vel,posAP]= InitialRandom2(N,S, AP);
+
+%Visualize access points positions: 
+
+
 
 % Visualize node positions:
 figure(1)
@@ -26,11 +31,11 @@ for iter= 1:T
   hold on
   
   % Compute the node pairs with direct connections:
-  L= ConnectedList(N,pos,W);
+  L= ConnectedList2(N,pos,W);
   % Compute the no. of connected node pairs of time instant iter:
-  %results(iter)= AverageConnectedNodePairs(N,L);
+  %results(iter)= AverageConnectedNodePairs2(N,L);
   % Update node coordinates and speed values:
-  [pos,vel]= UpdateCoordinates(pos,vel,delta);
+  [pos,vel]= UpdateCoordinates2(pos,vel,delta);
   pause(0.01)
 end
 
