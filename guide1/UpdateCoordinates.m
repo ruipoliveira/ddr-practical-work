@@ -1,3 +1,4 @@
+function [pos,vel]= UpdateCoordinates(pos,vel,delta)
 % Updates the current points coordinates according to their
 % velocity and bearing. Points crossing the edge of are reflected
 %
@@ -6,8 +7,6 @@
 % pos:      matrix containing points coordinates
 % velocity: matrix containing points speed and bearing
 % delta:    delta factor to apply
-
-function [pos,vel]= UpdateCoordinates(pos,vel,delta)
 
 AXIS_LIMIT = 300;
 ABSCISSA_LIMIT = 200;
