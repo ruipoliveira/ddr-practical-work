@@ -36,9 +36,9 @@ if AP == 3
 end
 if AP == 4
   posAP = [AXIS_LIMIT/4,ABSCISSA_LIMIT/4;
-          2*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4; 
-          AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;
-          2*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4];
+           3*AXIS_LIMIT/4,ABSCISSA_LIMIT/4;
+           AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;
+           3*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;];
 end
 
 %% speed and bearing
