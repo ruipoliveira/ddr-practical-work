@@ -1,21 +1,17 @@
 %Parameters initialization:
-N= 100; % Number of mobile nodes
+N= 50; % Number of mobile nodes
 W= 40; % Radio range (in meters)
 S= 15; % Maximum speed (in Km/h)
 delta= 1; % Difference between consecutive time instants (in seconds)
 %T= 3600; % No. of time instants of the simulation
 T=3600;
-AP = 1; % No. of APs 1,2,3 e 4
 
 S= S/3.6; % Conversion of maximum speed to m/s
 results= zeros(1,T); % Initialization of the results array
 
 % Generation of initial coordinates, speed and direction of mobile nodes:
-[pos,vel,posAP]= InitialRandom2(N,S, AP);
-
-%Visualize access points positions: 
-
-
+AP_count = 1;
+[pos,vel, posAP]= InitialRandom2(N,S,AP_count);
 
 % Visualize node positions:
 figure(1)
@@ -29,20 +25,26 @@ for iter= 1:T
   plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
   axis([0 300 0 200])
   hold on
+  for i=1:AP_count
+    plot(posAP(i,1),posAP(i,2),'*');
+  end
   
   % Compute the node pairs with direct connections:
   L= ConnectedList2(N,pos,W);
   % Compute the no. of connected node pairs of time instant iter:
-  %results(iter)= AverageConnectedNodePairs2(N,L);
+  results(iter)= AverageConnectedNodePairs2(N,L);
   % Update node coordinates and speed values:
-  [pos,vel]= UpdateCoordinates2(pos,vel,delta);
+  [pos,vel]= UpdateCoordinates(pos,vel,delta);
   pause(0.01)
 end
 
-% Plot in a different window the simulation results:
+% Plot in a different window the simulation results
+average = zeros(1,T);
+for i=1:T
+    average(1,i) = mean(results(1:i));
+end
 figure(2)
-plot((1:T)',results')
+plot((1:T)',results',(1:T)',average');
 
 % Compute the final result:
-FinalResult = average(results);
-
+FinalResult = mean(results);
