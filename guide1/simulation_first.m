@@ -34,9 +34,13 @@ for iter= 1:T
   pause(0.01)
 end
 
-% Plot in a different window the simulation results:
+% Plot in a different window the simulation results
+average = zeros(1,T);
+for i=1:T
+    average(1,i) = mean(results(1:i));
+end
 figure(2)
-plot((1:T)',results')
+plot((1:T)',results',(1:T)',average');
 
 % Compute the final result:
 FinalResult = mean(results);
