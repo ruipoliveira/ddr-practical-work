@@ -3,11 +3,29 @@ function o = AverageConnectedNodePairs( N, L )
 % node pairs based on the input matrix ‘L’ of node pairs with direct 
 % connections (see Section 4.1).
 
+labels = 1:N;
+repetir = true;
+[lines, ~] = size(L);
+o = 0;
 
+while repetir
+    for i=1:lines
+        indice1 = labels(1,L(i,1));
+        indice2 = labels(1,L(i,2));
+        if (indice1 ~= indice2)
+            labels(labels==indice2) = indice1;
+        end
+    end
+    repetir = false;
+end
 
+unique_labels = unique(labels);
+[~, unique_labels_count] = size(unique_labels);
 
-o = 1;
-
+for i=1:unique_labels_count
+    number_of_nodes = sum( labels(labels==unique_labels(1,i))==unique_labels(1,i)) ;
+    o = o + (( number_of_nodes * (number_of_nodes - 1) ) / 2) ;
+end
 
 end
 

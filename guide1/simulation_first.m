@@ -28,7 +28,7 @@ for iter= 1:T
   % Compute the node pairs with direct connections:
   L= ConnectedList(N,pos,W);
   % Compute the no. of connected node pairs of time instant iter:
-  %results(iter)= AverageConnectedNodePairs(N,L);
+  results(iter)= AverageConnectedNodePairs(N,L);
   % Update node coordinates and speed values:
   [pos,vel]= UpdateCoordinates(pos,vel,delta);
   pause(0.01)
@@ -39,5 +39,4 @@ figure(2)
 plot((1:T)',results')
 
 % Compute the final result:
-FinalResult = average(results);
-
+FinalResult = mean(results);
