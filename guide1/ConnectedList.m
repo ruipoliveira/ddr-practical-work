@@ -31,9 +31,5 @@ for i=2:lines
 end
 
 plot(draw_x, draw_y); % plot is slow. do it only once
-%refresh(1);
-%connected
-%draw_x
-%draw_y
-%waitforbuttonpress
+
 end

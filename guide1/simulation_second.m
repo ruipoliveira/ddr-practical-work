@@ -20,6 +20,7 @@ axis([0 300 0 200])
 grid on
 % Simulation cycle running all time instants iter:
 for iter= 1:T
+  figure(1)
   hold off
   % Visualize updated node positions:
   plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
@@ -31,23 +32,25 @@ for iter= 1:T
   end
   
   % Compute the node pairs with direct connections:
-  L= ConnectedList2(N,pos,W);
+  L= ConnectedList(N,[pos; posAP],W);
   % Compute the no. of connected node pairs of time instant iter:
-  results(iter)= AverageConnectedNodePairs2(N,L);
+  results(iter)= AverageConnectedNodePairs2(N,L, posAP);
   % Update node coordinates and speed values:
   [pos,vel]= UpdateCoordinates(pos,vel,delta);
   pause(0.01)
+  
+    hold off
+    % Plot in a different window the simulation results
+    average = zeros(1,T);
+    for i=1:T
+        average(1,i) = mean(results(1:i));
+    end
+    figure(2)
+    axis([0 T 0 1])
+    plot((1:T)',results',(1:T)',average');
+
+    % Compute the final result:
+    FinalResult = mean(results);
 end
 
-hold off
-% Plot in a different window the simulation results
-average = zeros(1,T);
-for i=1:T
-    average(1,i) = mean(results(1:i));
-end
-figure(2)
-axis([0 T 0 1])
-plot((1:T)',results',(1:T)',average');
 
-% Compute the final result:
-FinalResult = mean(results);
