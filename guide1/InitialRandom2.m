@@ -40,6 +40,11 @@ if AP == 4
            AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;
            3*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;];
 end
+if AP == 5 
+  posAP = [AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
+          3*AXIS_LIMIT/6,(ABSCISSA_LIMIT/2 + ABSCISSA_LIMIT/5);
+          5*AXIS_LIMIT/6,ABSCISSA_LIMIT/2];
+end
 
 %% speed and bearing
 S = S / 3.6;                        % conversion to m/s

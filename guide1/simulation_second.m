@@ -10,8 +10,9 @@ S= S/3.6; % Conversion of maximum speed to m/s
 results= zeros(1,T); % Initialization of the results array
 
 % Generation of initial coordinates, speed and direction of mobile nodes:
-AP_count = 4;
+AP_count = 3;
 [pos,vel, posAP]= InitialRandom2(N,S,AP_count);
+%AP_count = 3; % nasty fix to use mode = 5
 
 % Visualize node positions:
 figure(1)
@@ -39,18 +40,18 @@ for iter= 1:T
   [pos,vel]= UpdateCoordinates(pos,vel,delta);
   pause(0.01)
   
-    hold off
-    % Plot in a different window the simulation results
-    average = zeros(1,T);
-    for i=1:T
-        average(1,i) = mean(results(1:i));
-    end
-    figure(2)
-    axis([0 T 0 1])
-    plot((1:T)',results',(1:T)',average');
-
-    % Compute the final result:
-    FinalResult = mean(results);
 end
 
+hold off
+% Plot in a different window the simulation results
+average = zeros(1,T);
+for i=1:T
+    average(1,i) = mean(results(1:i));
+end
+figure(2)
+axis([0 T 0 1.1])
+plot((1:T)',results',(1:T)',average');
+
+% Compute the final result:
+FinalResult = mean(results);
 

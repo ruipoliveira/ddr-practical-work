@@ -10,19 +10,23 @@ repetir = true;
 o = 0;
 
 while repetir
+    repetir = false;
     for i=1:lines
         indice1 = labels(1,L(i,1));
         indice2 = labels(1,L(i,2));
-        if (indice1 == 1 || indice2 == 1)
+        if ((indice1 == 1 || indice2 == 1) && (indice1 ~= indice2))
             labels(1,L(i,1)) = 1;
             labels(1,L(i,2)) = 1;
+            repetir = true;
         end
     end
-    repetir = false;
 end
 
 unique_labels = unique(labels);
 [~, unique_labels_count] = size(unique_labels);
+
+% remove APs from the count
+labels = labels(1:N);
 
 for i=1:unique_labels_count
     number_of_nodes = sum( labels(labels==unique_labels(1,i))==unique_labels(1,i)) ;
