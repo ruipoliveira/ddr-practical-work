@@ -27,5 +27,7 @@ for i=1:unique_labels_count
     o = o + (( number_of_nodes * (number_of_nodes - 1) ) / 2) ;
 end
 
+o = o / ((N*(N-1)) / 2);
+
 end
 
