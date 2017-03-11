@@ -10,7 +10,7 @@ S= S/3.6; % Conversion of maximum speed to m/s
 results= zeros(1,T); % Initialization of the results array
 
 % Generation of initial coordinates, speed and direction of mobile nodes:
-AP_count = 1;
+AP_count = 4;
 [pos,vel, posAP]= InitialRandom2(N,S,AP_count);
 
 % Visualize node positions:
@@ -26,7 +26,8 @@ for iter= 1:T
   axis([0 300 0 200])
   hold on
   for i=1:AP_count
-    plot(posAP(i,1),posAP(i,2),'*');
+    andemande = plot(posAP(i,1),posAP(i,2),'s');
+    set(andemande,'LineWidth',30);
   end
   
   % Compute the node pairs with direct connections:
