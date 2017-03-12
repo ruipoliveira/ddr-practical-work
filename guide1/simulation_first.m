@@ -1,5 +1,5 @@
 %Parameters initialization:
-N= 100; % Number of mobile nodes
+N= 50; % Number of mobile nodes
 W= 40; % Radio range (in meters)
 S= 15; % Maximum speed (in Km/h)
 delta= 1; % Difference between consecutive time instants (in seconds)
