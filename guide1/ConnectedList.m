@@ -13,7 +13,8 @@ connected = zeros(lines,lines);
 connected(:) = W + 1;
 draw_x = [];
 draw_y = [];
-L = [];
+
+L = zeros( (lines*lines)/2, 2); % pre-allocate for faster computation
 
 for i=2:lines
     ponto1 = pos(i,:);
@@ -25,11 +26,12 @@ for i=2:lines
             %plot([ponto1(1,1) ponto2(1,1)],[ponto1(1,2) ponto2(1,2)])
             draw_x = [ draw_x NaN ponto1(1,1) ponto2(1,1)];
             draw_y = [ draw_y NaN ponto1(1,2) ponto2(1,2)];
-            L = [ L ;  i j ];
+            L((i*(i-1)/2)+j,:) = [i j];
         end
     end
 end
 
-plot(draw_x, draw_y); % plot is slow. do it only once
+L = L(any(L,2),:);          % filter the zeros of the preallocated memory
+plot(draw_xx, draw_yy);     % plot is slow. do it only once
 
 end
