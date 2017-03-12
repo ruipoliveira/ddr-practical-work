@@ -46,4 +46,4 @@ axis([0 T 0 1])
 plot((1:T)',results',(1:T)',average');
 
 % Compute the final result:
-FinalResult = mean(results);
+FinalResult = mean(results)

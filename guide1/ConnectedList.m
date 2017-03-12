@@ -32,6 +32,6 @@ for i=2:lines
 end
 
 L = L(any(L,2),:);          % filter the zeros of the preallocated memory
-plot(draw_xx, draw_yy);     % plot is slow. do it only once
+plot(draw_x, draw_y);       % plot is slow. do it only once
 
 end
