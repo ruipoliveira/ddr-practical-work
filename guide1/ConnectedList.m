@@ -14,7 +14,7 @@ connected(:) = W + 1;
 draw_x = [];
 draw_y = [];
 
-L = zeros( (lines*lines)/2, 2); % pre-allocate for faster computation
+L = zeros( ceil((lines*lines)/2), 2); % pre-allocate for faster computation
 
 for i=2:lines
     ponto1 = pos(i,:);
