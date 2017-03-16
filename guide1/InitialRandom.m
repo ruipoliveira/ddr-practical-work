@@ -21,7 +21,6 @@ ABSCISSA_LIMIT = 200;
 pos = [AXIS_LIMIT * rand(N, 1) ABSCISSA_LIMIT * rand(N, 1)];
 
 %% speed and bearing
-S = S / 3.6;                        % conversion to m/s
 abs_val = S * rand(N, 1);           % random speed
 angle_val = 2 * pi * rand(N, 1);    % random angle
 vel = [ abs_val.*cos(angle_val) abs_val.*sin(angle_val) ];
