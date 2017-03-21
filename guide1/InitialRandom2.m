@@ -29,10 +29,16 @@ if AP == 2
   posAP = [AXIS_LIMIT/4,ABSCISSA_LIMIT/2;
           2*AXIS_LIMIT/4,ABSCISSA_LIMIT/2];
 end
+%if AP == 3 
+%  posAP = [AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
+%          3*AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
+%          5*AXIS_LIMIT/6,ABSCISSA_LIMIT/2];
+%end
+% triangulo version 
 if AP == 3 
-  posAP = [AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
-          3*AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
-          5*AXIS_LIMIT/6,ABSCISSA_LIMIT/2];
+  posAP = [60,60;
+           240,60;
+           150,150;];
 end
 if AP == 4
   posAP = [AXIS_LIMIT/4,ABSCISSA_LIMIT/4;
@@ -41,9 +47,11 @@ if AP == 4
            3*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;];
 end
 if AP == 5 
-  posAP = [AXIS_LIMIT/6,ABSCISSA_LIMIT/2;
-          3*AXIS_LIMIT/6,(ABSCISSA_LIMIT/2 + ABSCISSA_LIMIT/5);
-          5*AXIS_LIMIT/6,ABSCISSA_LIMIT/2];
+  posAP = [AXIS_LIMIT/4,ABSCISSA_LIMIT/4;
+           3*AXIS_LIMIT/4,ABSCISSA_LIMIT/4;
+           AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;
+           3*AXIS_LIMIT/4,3*ABSCISSA_LIMIT/4;
+           AXIS_LIMIT/2,ABSCISSA_LIMIT/2];
 end
 
 %% speed and bearing

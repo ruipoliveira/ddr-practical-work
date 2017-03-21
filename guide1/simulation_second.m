@@ -21,16 +21,16 @@ axis([0 300 0 200])
 grid on
 % Simulation cycle running all time instants iter:
 for iter= 1:T
-%     figure(1)
-%     hold off
-%     % Visualize updated node positions:
-%     plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
-%     axis([0 300 0 200])
-%     hold on
-%     for i=1:AP_count
-%         andemande = plot(posAP(i,1),posAP(i,2),'s');
-%         set(andemande,'LineWidth',30);
-%     end
+     figure(1)
+     hold off
+     % Visualize updated node positions:
+     plot(pos(:,1),pos(:,2),'o','MarkerEdgeColor','b','MarkerFaceColor','b')
+     axis([0 300 0 200])
+     hold on
+     for i=1:AP_count
+         andemande = plot(posAP(i,1),posAP(i,2),'s');
+         set(andemande,'LineWidth',30);
+     end
     
     % Compute the node pairs with direct connections:
     L= ConnectedList(N,[pos; posAP],W);
@@ -38,7 +38,7 @@ for iter= 1:T
     results(iter)= AverageConnectedNodePairs2(N,L, posAP);
     % Update node coordinates and speed values:
     [pos,vel]= UpdateCoordinates(pos,vel,delta);
-%     pause(0.01)
+    pause(0.01)
     
 end
 
