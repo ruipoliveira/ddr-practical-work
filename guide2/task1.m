@@ -32,15 +32,15 @@ end
 results(3,:) = 1 - results(1,:) - results(2,:);
 
 results
-
+results = [];
 % 2b)
-for i=0:1
-    for j=1:3
-        results(i+1,j) = 1;
-        for k=0:1
-            results(i+1,j) = results(i+1,j) - (0.90 * binopdf(k, 1500*8, error_rates(j))) + (0.10 * binopdf(k, 64*8, error_rates(j)));      
-        end
+
+for j=1:3
+    results(j) = 1;
+    for k=0:1
+        results(j) = results(j) - (0.90 * binopdf(k, 1500*8, error_rates(j))) + (0.10 * binopdf(k, 64*8, error_rates(j)));
     end
 end
+
 
 results
