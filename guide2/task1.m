@@ -32,8 +32,9 @@ results(3,:) = 1 - results(1,:) - results(2,:);
 results
 results = [];
 
-% 1b) Consider that 10% of data packets has a total size B=64 bytes and 90% of data packets has a 
-%total size B=1500 bytes. Determine the packet discard rate (i.e., the percentage of packets that are discarded) and fulfil the following table:
+% 1b) Consider that 10% of data packets has a total size B=64 bytes and 
+%90% of data packets has a total size B=1500 bytes. Determine the packet
+%discard rate (i.e., the percentage of packets that are discarded) and fulfil the following table:
 
 for j=1:3
     results(j) = 1;
@@ -45,19 +46,22 @@ end
 results
 results = [];
 
-% 1c) Consider now that the total size, in number of Bytes, of the data packets is a constant value (64 Bytes) plus a geometric random value with parameter p=0.02. Determine the
-%packet discard rate on this case and fulfil the following table:
+% 1c) Consider now that the total size, in number of Bytes, of the data 
+%packets is a constant value (64 Bytes) plus a geometric random value with
+%parameter p=0.02. Determine the packet discard rate on this case and 
+%fulfil the following table:
 
 p = 0.02;
-for i=0:1000
-for j=1:3
-    results(j) = 0;	
-	n = (64 +i)* 8;
-    geo_value = p*(1-p).^i; 
-    results(j) = results(j) + (1- binopdf(0,n, error_rates(j))) +(1- binopdf(1,n, error_rates(j))) * geo_value;
-end
 
-end 
+for j=1:3
+	results(j) = 0;
+	for i=0:1000
+		n = (64 +i)* 8;
+	    geo_value = p*(1-p).^i;
+	    results(j) = results(j) + (1- binopdf(0,n, error_rates(j)) - binopdf(1,n, error_rates(j))) * geo_value;
+	end
+end
 results
+
 
 
