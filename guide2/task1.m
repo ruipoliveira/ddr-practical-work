@@ -32,7 +32,7 @@ results(3,:) = 1 - results(1,:) - results(2,:);
 results
 results = [];
 
-% 1b) Consider that 10% of data packets has a total size B=64 bytes and 
+% 1b) Consider that 10% of data packets has a total size B=64 bytes and
 %90% of data packets has a total size B=1500 bytes. Determine the packet
 %discard rate (i.e., the percentage of packets that are discarded) and fulfil the following table:
 
@@ -46,22 +46,47 @@ end
 results
 results = [];
 
-% 1c) Consider now that the total size, in number of Bytes, of the data 
+% 1c) Consider now that the total size, in number of Bytes, of the data
 %packets is a constant value (64 Bytes) plus a geometric random value with
-%parameter p=0.02. Determine the packet discard rate on this case and 
+%parameter p=0.02. Determine the packet discard rate on this case and
 %fulfil the following table:
 
 p = 0.02;
 
 for j=1:3
-	results(j) = 0;
-	for i=0:1000
-		n = (64 +i)* 8;
-	    geo_value = p*(1-p).^i;
-	    results(j) = results(j) + (1- binopdf(0,n, error_rates(j)) - binopdf(1,n, error_rates(j))) * geo_value;
-	end
+    results(j) = 0;
+    for i=0:1000
+        n = (64 +i)* 8;
+        geo_value = p*(1-p).^i;
+        results(j) = results(j) + (1- binopdf(0,n, error_rates(j)) - binopdf(1,n, error_rates(j))) * geo_value;
+    end
 end
 results
+results=[];
 
 
 
+% 1.d. Consider now that the 32 bytes field for error correction are replaced by a 4 bytes field
+% on each data packet which only enables the receiver to detect if the data packet has been
+% received with errors. Repeat 1.b. and 1.c. for this case and fulfill the following tables:
+
+for j=1:3
+    results(j) = (0.90 * (1- binopdf(0, 1500*8 -28*8, error_rates(j)))) + (0.10 * (1- binopdf(0, 64*8 - 28*8, error_rates(j))));
+end
+fprintf('1d, rep 1b')
+results
+results = [];
+
+p = 0.02;
+
+for j=1:3
+    results(j) = 0;
+    for i=0:1000
+        n = (64-28 +i)* 8;
+        geo_value = p*(1-p).^i;
+        results(j) = results(j) +  (1-binopdf(0,n, error_rates(j))) * geo_value;
+    end
+end
+fprintf('1d, rep 1c')
+results
+results=[];
