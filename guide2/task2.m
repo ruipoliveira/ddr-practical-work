@@ -40,6 +40,8 @@ end
 results
 results = [];
 
+% 2.c. For each value of p and for n = 2, 3, 4 and 5, determine the probability of false
+% negatives and fulfil the follow table:
 
 results = [];
 for n=2:5
