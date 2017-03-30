@@ -12,6 +12,8 @@ pF2 = 0;
 %pF1E = (pEF1*pF1) / (pEF1*pF1 + pEF2*pF2)
 
 results = [];
+format long
+
 for i=1:size(pAll,2)
     pEF1 = 0.0001;
     pEF2 = 0.5;
