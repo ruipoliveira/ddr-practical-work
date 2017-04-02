@@ -1,7 +1,6 @@
 
 % implementation markov
 
-
 br0 = 1; 
 br1 = 5;
 br2 = 5; 
@@ -36,9 +35,9 @@ biterror = P0 * 10^-5 + P1 * 10^-4 + P2 * 10^-3 + P3 * 10^-2 + P4 * 10^-1
 fprintf('task 3c \n');
 
 duration0 = (1/br0)*60
-duration1 = (1/br1+ded1)*60
-duration2 = (1/br2+ded2)*60
-duration3 = (1/br3+ded3)*60
+duration1 = (1/(br1+ded1))*60
+duration2 = (1/(br2+ded2))*60
+duration3 = (1/(br3+ded3))*60
 duration4 = (1/ded4)*60
 
 
