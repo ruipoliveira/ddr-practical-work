@@ -8,3 +8,6 @@ for i=1:size(states,2)
    st = states(i);
    biterror = biterror + markov_func(st,br,dr)*bers(i);
 end
+
+fprintf('%d : %d \n',st,biterror);
+
