@@ -1,4 +1,4 @@
-format shorte
+
 for j=1:3
     results(j) = 1;
     for k=0:1

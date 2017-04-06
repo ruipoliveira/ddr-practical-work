@@ -1,4 +1,4 @@
-format long; 
+
 
 states = [0 1 2 3 4];
 bers = [ 10^-5 10^-4 10^-3 10^-2 10^-1];
@@ -17,11 +17,12 @@ ded3 = 50;
 ded4 = 20; 
 
 fprintf('task 3a \n');
-
+format long; 
 for i=1:size(states,2)
    st = states(i);
-   fprintf('%d : %d \n',st,markov_func(st,br,dr)*100); 
+   fprintf('%d : %f \n',st,markov_func(st,br,dr)*100); 
 end
+
 
 %old implementation
 P0 =  1 / (1 + (br0/ded1) + ((br0*br1)/(ded1*ded2)) + ((br0*br1*br2)/(ded1*ded2*ded3)) + ((br0*br1*br2*br3)/(ded1*ded2*ded3*ded4)));
@@ -60,4 +61,8 @@ duration2 = (1/(br2+ded2))*60
 duration3 = (1/(br3+ded3))*60
 duration4 = (1/ded4)*60
 
+
+% task 3d
+
+markov_func(3,[1 5 5],[100 50 50 20]) + markov_func(4,[1 5 5 10],[100 50 50 20])
 

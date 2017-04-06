@@ -26,7 +26,7 @@ end
 format SHORTE; % em probabilidade
 fprintf('2a')
 results
-format short;
+format shorte;
 
 % 2.b. For each value of p and for n = 2, 3, 4 and 5, determine the probability of false positives
 % and fulfil the follow table:
@@ -44,7 +44,6 @@ for n=2:5
 end
 %format SHORTE; % em probabilidade
 fprintf('2b')
-results = results * 100;
 results
 results = [];
 
@@ -63,7 +62,6 @@ for n=2:5
     end
 end
 fprintf('2c')
-results = results * 100;
 results
 
 

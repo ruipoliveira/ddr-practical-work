@@ -39,7 +39,7 @@ results = [];
 %discard rate (i.e., the percentage of packets that are discarded) and fulfil the following table:
 
 % determinar rate (percentagem)
-format short; 
+format shorte; 
 
 for j=1:3
     results(j) = 1;
@@ -89,7 +89,7 @@ for j=1:3
     results(j) = results(j) * 100;
 end
 fprintf('1d, rep 1b')
-format short;
+format shortE;
 results
 results = [];
 

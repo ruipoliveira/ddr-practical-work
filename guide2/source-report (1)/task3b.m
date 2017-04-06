@@ -9,5 +9,5 @@ for i=1:size(states,2)
    biterror = biterror + markov_func(st,br,dr)*bers(i);
 end
 
-biterror
+fprintf('%d : %d \n',st,biterror);
 
