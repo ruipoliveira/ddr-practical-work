@@ -1,7 +1,15 @@
-function p = average_connection_load(N, ro)
-	a= 1; p= 1;
-	for n= N:-1:1
-		a= a*n/ro;
-		p= p+a;
+function o = average_connection_load(N, ro)
+	a= N;
+	numerator= a;
+	for i= N-1:-1:1
+		a= a*i/ro;
+		numerator= numerator+a;
 	end
-	p= 1/p
+	a= 1;
+	denominator= a;
+	for i= N:-1:1
+		a= a*i/ro;
+		denominator= denominator+a;
+	end
+	o= numerator/denominator; 
+

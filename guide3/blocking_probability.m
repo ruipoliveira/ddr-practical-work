@@ -1,14 +1,8 @@
-function o = blocking_probability(N, ro)
-	a= N;
-	numerator= a;
-	for i= N-1:-1:1
-		a= a*i/ro;
-		numerator= numerator+a;
+function p = blocking_probability(N, ro)
+	
+	a= 1; p= 1;
+	for n= N:-1:1
+		a= a*n/ro;
+		p= p+a;
 	end
-	a= 1;
-	denominator= a;
-	for i= N:-1:1
-		a= a*i/ro;
-		denominator= denominator+a;
-	end
-	o= numerator/denominator
+	p= 1/p; 
