@@ -6,11 +6,47 @@ minutes_all = [90 95 90 95 90 95 90 95 90 95 90 95];
 
 R = 10000; 
 
-N = 20;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alinea 1 a) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+N = 10;
 
 result_b = zeros(1,N);
 result_o = zeros(1,N);
 
+format short; 
+for it= 1:N
+	for i= 1:size(C_all,2)
+		[b o] = simulator1(lambda_all(i), minutes_all(i), C_all(i), M ,R ); 
+		result_b(i) = b*100; 
+		result_o(i) = o; 
+	end 
+end
+
+fprintf('Ex 1 a)\n') 
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_b);
+termo = norminv(1-alfa/2)*sqrt(var(result_b)/N);
+fprintf('resultado_b = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_b = %.2e // %.2e\n',media+termo, media-termo)
+
+
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_o);
+termo = norminv(1-alfa/2)*sqrt(var(result_o)/N);
+fprintf('resultado_o = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_o = %.2e // %.2e\n',media+termo, media-termo)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alinea 1 b) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+N = 1000;
+
+result_b = zeros(1,N);
+result_o = zeros(1,N);
 
 format short; 
 for it= 1:N
@@ -22,17 +58,85 @@ for it= 1:N
 	end 
 end
 
-
+fprintf('Ex 1 b)\n') 
 alfa= 0.1; %intervalo de confiança a 90%
 media = mean(result_b);
 termo = norminv(1-alfa/2)*sqrt(var(result_b)/N);
-fprintf('resultado = %.2e +- %.2e\n',media,termo)
-fprintf('resultado = %.2e,%.2e\n',media-termo,media+termo)
+fprintf('resultado_b = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_b = %.2e // %.2e\n',media+termo, media-termo)
 
 
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_o);
+termo = norminv(1-alfa/2)*sqrt(var(result_o)/N);
+fprintf('resultado_o = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_o = %.2e // %.2e\n',media+termo, media-termo)
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alinea 1 c) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+caseJ_lambda = 300; 
+caseJ_minutes = 95; 
+caseJ_C = 1000; 
+
+R = 10000; 
+N= 1000; 
+
+result_b = zeros(1,N);
+result_o = zeros(1,N);
+
+format short; 
+for it= 1:N
+	[b o] = simulator1(caseJ_lambda, caseJ_minutes, caseJ_C, M ,R ); 
+	result_b(i) = b*100; 
+	result_o(i) = o;
+end
+
+fprintf('Ex 1 c)\n') 
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_b);
+termo = norminv(1-alfa/2)*sqrt(var(result_b)/N);
+fprintf('resultado_b = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_b = %.2e // %.2e\n',media+termo, media-termo)
 
 
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_o);
+termo = norminv(1-alfa/2)*sqrt(var(result_o)/N);
+fprintf('resultado_o = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_o = %.2e // %.2e\n',media+termo, media-termo)
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alinea 1 d) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+R = 100000; 
+N= 1000; 
+
+result_b = zeros(1,N);
+result_o = zeros(1,N);
+
+format short; 
+for it= 1:N
+	[b o] = simulator1(caseJ_lambda, caseJ_minutes, caseJ_C, M ,R ); 
+	result_b(i) = b*100; 
+	result_o(i) = o;
+end
+
+fprintf('Ex 1 c)\n') 
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_b);
+termo = norminv(1-alfa/2)*sqrt(var(result_b)/N);
+fprintf('resultado_b = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_b = %.2e // %.2e\n',media+termo, media-termo)
+
+
+alfa= 0.1; %intervalo de confiança a 90%
+media = mean(result_o);
+termo = norminv(1-alfa/2)*sqrt(var(result_o)/N);
+fprintf('resultado_o = %.2e +- %.2e\n',media,termo)
+fprintf('resultado_o = %.2e // %.2e\n',media+termo, media-termo)
