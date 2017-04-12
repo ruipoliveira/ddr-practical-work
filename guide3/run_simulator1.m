@@ -27,6 +27,7 @@ alfa= 0.1; %intervalo de confiança a 90%
 media = mean(result_b);
 termo = norminv(1-alfa/2)*sqrt(var(result_b)/N);
 fprintf('resultado = %.2e +- %.2e\n',media,termo)
+fprintf('resultado = %.2e,%.2e\n',media-termo,media+termo)
 
 
 
