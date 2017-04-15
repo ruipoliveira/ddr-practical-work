@@ -6,8 +6,7 @@ minutes_all = [90 95 90 95 90 95 90 95 90 95 90 95];
 
 %ex2_2a(M, C_all, lambda_all, minutes_all);
 %ex2_2b(M, C_all, lambda_all, minutes_all);
-%ex2_2c(M, C_all, lambda_all, minutes_all);
-%ex2_2d(M, C_all, lambda_all, minutes_all);
+ex2_2c(M, C_all, lambda_all, minutes_all);
 
 
 %% runs simulator1 according to the tests
@@ -81,16 +80,20 @@ caseJ_C = 1000;
 
 R = 10000;
 N= 100;
+N=3
 
 [b, o] = simulator1_wrapper(M, caseJ_C, caseJ_lambda, caseJ_minutes, R, N);
 
+b_confidence = zeros(1,2);
+o_confidence = zeros(1,2);
+
 % print results
-
-[b_avg, b_termo] = confidence_level(0.1,b(1,:),N);
-[o_avg, o_termo] = confidence_level(0.1,o(1,:),N);
-fprintf('Case J = %.2e +- %.2e || ', b_avg, b_termo)
-fprintf('%.2e +- %.2e\n',o_avg, o_termo)
-
+for i=1:size(C_all,2)
+    [b_avg, b_confidence(i,2)] = confidence_level(0.1,b(i,:),N);
+    [o_confidence(i,1), o_confidence(i,2)] = confidence_level(0.1,o(i,:),N);
+    fprintf('Case J = %.2e +- %.2e || ',char(i+64), b_confidence(i,1), b_confidence(i,2))
+    fprintf('%.2e +- %.2e\n',o_confidence(i,1), o_confidence(i,2))
+end
 
 end
 
@@ -107,11 +110,15 @@ N= 1000;
 
 [b, o] = simulator1_wrapper(M, caseJ_C, caseJ_lambda, caseJ_minutes, R, N);
 
-% print results
+b_confidence = zeros(1,2);
+o_confidence = zeros(1,2);
 
-[b_avg, b_termo] = confidence_level(0.1,b(1,:),N);
-[o_avg, o_termo] = confidence_level(0.1,o(1,:),N);
-fprintf('Case J = %.2e +- %.2e || ', b_avg, b_termo)
-fprintf('%.2e +- %.2e\n',o_avg, o_termo)
+% print results
+for i=1:size(C_all,2)
+    [b_confidence(i,1), b_confidence(i,2)] = confidence_level(0.1,b(i,:),N);
+    [o_confidence(i,1), o_confidence(i,2)] = confidence_level(0.1,o(i,:),N);
+    fprintf('Case %c = %.2e +- %.2e || ',char(i+64), b_confidence(i,1), b_confidence(i,2))
+    fprintf('%.2e +- %.2e\n',o_confidence(i,1), o_confidence(i,2))
+end
 
 end
