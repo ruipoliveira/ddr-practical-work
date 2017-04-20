@@ -11,21 +11,29 @@ function [b_s b_h]= simulator2(lambda,p,invmiu,S, W, Ms, Mh, R, N)
 
 	C = S * 100; 
 
-
-	invlambda=60/lambda; %average time between requests (in minutes)
-	
+	invlambda=60/lambda; %average time between requests (in minutes)	
 
 	%Events definition:
-	ARRIVAL= 0; %movie request
-	DEPARTURE= 1; 	%termination of a movie transmission
+	ARRIVAL_S = 0; 
+	ARRIVAL_H = 0; 
+
+	DEPARTURE_S = zeros(1,S);
+	DEPARTURE_H = zeros(1,S);
 	
 	%State variables initialization:
-	STATE= 0;
-	
+	STATE= zeros(1,S);
+	STATE_S = 100; 
+
+
 	%Statistical counters initialization:
 	LOAD= 0;
 	NARRIVALS= 0;
-	BLOCKED= 0;
+	NARRIVALS_S = 0; 
+	NARRIVALS_H = 0; 
+
+	BLOCKED_H= 0;
+	BLOCKED_S = 0; 
+
 	
 	%Simulation Clock and initial List of Events:
 	Clock= 0;
