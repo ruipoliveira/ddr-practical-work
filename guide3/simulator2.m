@@ -1,4 +1,4 @@
-function [b_s b_h]= simulator2(lambda,p,invmiu,S, W, Ms, Mh, R, N)
+function [b_s, b_h]= simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N)
 %lambda = movies request rate (in requests/hour)
 %p = percentage of requests for high-definition movies (in %)
 %invmiu= average duration of movies (in minutes)
@@ -9,23 +9,22 @@ function [b_s b_h]= simulator2(lambda,p,invmiu,S, W, Ms, Mh, R, N)
 %R = number of movie requests to stop simulation
 %N = movie request number to start updating the statistical counters
 
-C = S * 100;
+N_C = 100;                  % node capacity
+C = S * N_C;
 
-invlambda=60/lambda; %average time between requests (in minutes)
+invlambda = 60 / lambda;    %average time between requests (in minutes)
 
 %Events definition:
 ARRIVAL_S = 0;
-ARRIVAL_H = 0;
-
-DEPARTURE_S = ones(1,S);
-DEPARTURE_H = ones(1,S);
+ARRIVAL_H = 1;
+DEPARTURE_S = 2;
+DEPARTURE_H = 3;
 
 %State variables initialization:
 STATE= zeros(1,S);
 STATE_S = 0;
 
 %Statistical counters initialization:
-LOAD= 0;
 NARRIVALS= 0;
 NARRIVALS_S = 0;
 NARRIVALS_H = 0;
@@ -34,62 +33,76 @@ BLOCKED_H= 0;
 BLOCKED_S = 0;
 
 %Simulation Clock and initial List of Events:
-Clock= 0;
-EventList= [ARRIVAL_S exprnd(invlambda); ARRIVAL_H exprnd(invlambda)];
+Clock = 0;
+EventList= [ARRIVAL_S exprnd(lambda);    ARRIVAL_H exprnd(lambda)];
 EventList= sortrows(EventList,2);
 
-
-NARRIVALS = ARRIVAL_S + ARRIVAL_S;
-
-
 while NARRIVALS < R
-    event= EventList(1,1);
-    Clock= EventList(1,2);
-    server_id = EventList(1,3);
-    Previous_Clock= Clock;
+    event = EventList(1,1);
+    Clock = EventList(1,2);
+    node_id = EventList(1,3);
     
-    EventList(1,:)= [];
+    EventList(1,:) = [];
     
-    LOAD= LOAD + STATE*(Clock-Previous_Clock);
-    
-    
-    % in standard
-    if event == ARRIVAL_S
-        EventList= [EventList; ARRIVAL Clock+exprnd(invlambda) 0];
-        NARRIVALS= NARRIVALS+1;
+    % process arrivals
+    if event == ARRIVAL_H || event == ARRIVAL_S
         
-        min_state_id = find(STATE==min(STATE))
-        
-        if STATE + M <= C % verificar condicoes pdf
-            STATE= STATE+M;
-            EventList= [EventList; DEPARTURE Clock+exprnd(invmiu) server_id];
+        % add next arrival
+        if rand() < p
+            EventList= [EventList; ARRIVAL_H Clock+exprnd(lambda) 0];
         else
-            BLOCKED= BLOCKED+1;
+            EventList= [EventList; ARRIVAL_S Clock+exprnd(lambda) 0];
         end
         
-        % in high-definition
-    elseif event == ARRIVAL_H
-        EventList= [EventList; ARRIVAL Clock+exprnd(invlambda)];
-        NARRIVALS= NARRIVALS+1;
-        if STATE + M <= C % verificar
-            STATE= STATE+M;
-            EventList= [EventList; DEPARTURE Clock+exprnd(invmiu)];
+        % find most available server
+        loadbalancer = find(STATE==min(STATE));
+        
+        if event == ARRIVAL_S
+            % process standard video
+            NARRIVALS_S = NARRIVALS_S + 1;
+            
+            % regras de aceitacao
+            if (STATE(loadbalancer) + Ms <= N_C) || (STATE(loadbalancer) + W) <= N_C
+                
+                STATE(loadbalancer) = STATE(loadbalancer) + Ms;
+                EventList= [EventList; DEPARTURE_S Clock+exprnd(invmiu) loadbalancer];
+                
+            else
+                BLOCKED_S = BLOCKED_S + 1;
+            end
+            
         else
-            BLOCKED= BLOCKED+1;
+            % process high def video
+            NARRIVALS_H = NARRIVALS_H + 1;
+            
+            % regras de aceitacao ou bloqueio
+            if STATE(loadbalancer) + Mh <= N_C
+                
+                STATE(loadbalancer) = STATE(loadbalancer) + Mh;
+                EventList= [EventList; DEPARTURE_H Clock+exprnd(invmiu) loadbalancer];
+                
+            else
+                BLOCKED_H = BLOCKED_H + 1;
+            end
+            
         end
         
     else
-        if STATE== DEPARTURE_H
-            % remove banda 5 mbps para o servidor server_id
+        % departures
+        
+        if event == DEPARTURE_S
+            STATE(node_id) = STATE(node_id) - Ms;
         else
-            % remove banda 2 mbps para o servidor server_id
+            STATE(node_id) = STATE(node_id) - Mh;
         end
+        
     end
     
     EventList= sortrows(EventList,2);
-    
+    NARRIVALS = NARRIVALS_S + NARRIVALS_H;
     b_s = BLOCKED_S/NARRIVALS_S;
     b_h = BLOCKED_H/NARRIVALS_H;
+    
 end
 
 end
