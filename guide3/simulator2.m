@@ -1,4 +1,4 @@
-function [b_s b_h]= simulator1(lambda,p,invmiu,S, W, Ms, Mh, R, N)
+function [b_s b_h]= simulator2(lambda,p,invmiu,S, W, Ms, Mh, R, N)
 	%lambda = movies request rate (in requests/hour)
 	%p = percentage of requests for high-definition movies (in %)
 	%invmiu= average duration of movies (in minutes)
@@ -9,8 +9,12 @@ function [b_s b_h]= simulator1(lambda,p,invmiu,S, W, Ms, Mh, R, N)
 	%R = number of movie requests to stop simulation
 	%N = movie request number to start updating the statistical counters
 
+	C = S * 100; 
+
+
 	invlambda=60/lambda; %average time between requests (in minutes)
 	
+
 	%Events definition:
 	ARRIVAL= 0; %movie request
 	DEPARTURE= 1; 	%termination of a movie transmission
