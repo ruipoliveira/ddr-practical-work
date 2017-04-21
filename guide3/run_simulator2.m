@@ -24,18 +24,26 @@ end
 function ex3_2()
 S = 2;                  % 2 server farms
 p = 0.1;                % 10% of requests are HD
+
+subscribers = 8000;
 lambda = 1 / (24 * 7);  % 1 request / week. lambda is requests/hour
+lambda = lambda * subscribers; 
+
 invmiu = 90;
 Ms = 2;
 Mh = 5;
 R = 10000;
-N = 1*24*31*8000;       % one month warm up
+N = 1000;       % one month warm up
+
+b_s = zeros(1,100);
+b_h = zeros(1,100);
 
 for W=1:100
-    [b_s, b_h] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N);
-    fprintf('W %.0f: %.3f || %.3f\n', W, b_s, b_h)
+    [b_s(W), b_h(W)] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N);
+    fprintf('W %.0f: %.3f || %.3f\n', W, b_s(W), b_h(W))
 end
 
+plot(1:100,b_s, 1:100, b_h);
 
 end
 
