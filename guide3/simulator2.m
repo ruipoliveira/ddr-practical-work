@@ -34,7 +34,7 @@ BLOCKED_S = 0;
 
 %Simulation Clock and initial List of Events:
 Clock = 0;
-EventList= [ARRIVAL_S exprnd(lambda);    ARRIVAL_H exprnd(lambda)];
+EventList= [ARRIVAL_S exprnd(lambda) 0; ARRIVAL_H exprnd(lambda) 0];
 EventList= sortrows(EventList,2);
 
 while NARRIVALS < R
@@ -56,13 +56,14 @@ while NARRIVALS < R
         
         % find most available server
         loadbalancer = find(STATE==min(STATE));
+        loadbalancer = loadbalancer(1);
         
         if event == ARRIVAL_S
             % process standard video
             NARRIVALS_S = NARRIVALS_S + 1;
             
             % regras de aceitacao
-            if (STATE(loadbalancer) + Ms <= N_C) || (STATE(loadbalancer) + W) <= N_C
+            if ( (STATE(loadbalancer) + Ms <= N_C) || (STATE(loadbalancer) + W <= N_C) )
                 
                 STATE(loadbalancer) = STATE(loadbalancer) + Ms;
                 EventList= [EventList; DEPARTURE_S Clock+exprnd(invmiu) loadbalancer];
