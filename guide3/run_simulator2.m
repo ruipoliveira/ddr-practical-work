@@ -11,5 +11,6 @@ for i=1:size(lambda,2)
     R = 10000;
     N = 1000;
     
-    [b_s, b_h]= simulator2(lambda(i), p, invmiu, S(i), W(i), Ms, Mh, R, N)
+    [b_s, b_h] = simulator2(lambda(i), p, invmiu, S(i), W(i), Ms, Mh, R, N)
+    pause
 end

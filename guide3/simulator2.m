@@ -34,7 +34,7 @@ BLOCKED_S = 0;
 
 %Simulation Clock and initial List of Events:
 Clock = 0;
-EventList= [ARRIVAL_S exprnd(lambda) 0; ARRIVAL_H exprnd(lambda) 0];
+EventList= [ARRIVAL_S exprnd(invlambda) 0; ARRIVAL_H exprnd(invlambda) 0];
 EventList= sortrows(EventList,2);
 
 while NARRIVALS < R
@@ -49,9 +49,9 @@ while NARRIVALS < R
         
         % add next arrival
         if rand() < p
-            EventList= [EventList; ARRIVAL_H Clock+exprnd(lambda) 0];
+            EventList= [EventList; ARRIVAL_H Clock+exprnd(invlambda) 0];
         else
-            EventList= [EventList; ARRIVAL_S Clock+exprnd(lambda) 0];
+            EventList= [EventList; ARRIVAL_S Clock+exprnd(invlambda) 0];
         end
         
         % find most available server
