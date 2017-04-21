@@ -37,7 +37,7 @@ Clock = 0;
 EventList= [ARRIVAL_S exprnd(invlambda) 0; ARRIVAL_H exprnd(invlambda) 0];
 EventList= sortrows(EventList,2);
 
-while NARRIVALS < R
+while NARRIVALS < R + N
     event = EventList(1,1);
     Clock = EventList(1,2);
     node_id = EventList(1,3);
@@ -101,8 +101,14 @@ while NARRIVALS < R
     
     EventList= sortrows(EventList,2);
     NARRIVALS = NARRIVALS_S + NARRIVALS_H;
-    b_s = BLOCKED_S/NARRIVALS_S;
-    b_h = BLOCKED_H/NARRIVALS_H;
+    
+    if NARRIVALS == N
+        BLOCKED_S = 0;
+        BLOCKED_H = 0;
+    elseif NARRIVALS > N
+        b_s = BLOCKED_S/NARRIVALS_S;
+        b_h = BLOCKED_H/NARRIVALS_H;
+    end
     
 end
 
