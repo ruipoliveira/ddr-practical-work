@@ -63,7 +63,7 @@ while NARRIVALS < R + N
             NARRIVALS_S = NARRIVALS_S + 1;
             
             % regras de aceitacao
-            if ( (STATE(loadbalancer) + Ms <= N_C) || (STATE(loadbalancer) + W <= N_C) )
+            if STATE(loadbalancer) + Ms + W <= N_C
                 
                 STATE(loadbalancer) = STATE(loadbalancer) + Ms;
                 EventList= [EventList; DEPARTURE_S Clock+exprnd(invmiu) loadbalancer];
