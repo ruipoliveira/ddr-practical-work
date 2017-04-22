@@ -3,11 +3,11 @@ lambda = [13 13 13 50 50 50];
 S = [1 1 1 3 3 3];
 W = [0 60 80 0 180 240];
 
-%ex3_1(lambda, S, W)
-%ex3_2()
-ex3_3()
+%ex3_a(lambda, S, W)
+%ex3_b()
+ex3_c()
 
-function ex3_1(lambda, S, W)
+function ex3_a(lambda, S, W)
 p = 0.4;
 invmiu = 90;
 Ms = 2;
@@ -22,7 +22,7 @@ end
 
 end
 
-function ex3_2()
+function ex3_b()
 S = 2;                  % 2 server farms
 p = 0.1;                % 10% of requests are HD
 
@@ -48,7 +48,7 @@ plot(1:100,b_s, 1:100, b_h);
 
 end
 
-function ex3_3()
+function ex3_c()
 
 p = 0.2;        % 20% HD requests
 lambda = 1 / (24*7);
@@ -57,10 +57,10 @@ invmiu = 90;
 Ms = 2;
 Mh = 5;
 R = 10000;
-N = 1000;
+N = 10000;
 
 S_limit = 15;
-W_limit = 20;
+W_limit = 50;
 
 b_s = zeros(W_limit, S_limit);
 b_h = zeros(W_limit, S_limit);
@@ -89,9 +89,15 @@ surf(1:S_limit, 0:W_limit, worse_case)
 xlabel('Nr Servers');
 ylabel('W reservation');
 zlabel('Worst case');
-
+axis([1 S_limit 0 W_limit 0 0.5])
 view(70,27)
 grid on
 
+% a = [2,2,3;0,2,5;1 2 3]
+% [row,column]=find(a==min(min(a(a>0))))
+
+[S_optimal, W_optimal] = find(worse_case==min(min(worse_case(worse_case>0))))
+
+w=1
 end
 

@@ -48,7 +48,7 @@ while NARRIVALS < R + N
     if event == ARRIVAL_H || event == ARRIVAL_S
         
         % add next arrival
-        if rand() < p
+        if rand() <= p
             EventList= [EventList; ARRIVAL_H Clock+exprnd(invlambda) 0];
         else
             EventList= [EventList; ARRIVAL_S Clock+exprnd(invlambda) 0];
