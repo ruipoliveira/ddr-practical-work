@@ -12,7 +12,7 @@ function [b_s, b_h]= simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N)
 N_C = 100;                  % node capacity
 C = S * N_C;
 
-invlambda = 60 / lambda;    %average time between requests (in minutes)
+invlambda = 60 / lambda;    % average time between requests (in minutes)
 
 %Events definition:
 ARRIVAL_S = 0;
@@ -47,8 +47,7 @@ while NARRIVALS < R + N
     % process arrivals
     if event == ARRIVAL_H || event == ARRIVAL_S
         
-        % add next arrival
-        if rand() <= p
+        if rand() <= p % add next arrival according to the probability of SD or HD
             EventList= [EventList; ARRIVAL_H Clock+exprnd(invlambda) 0];
         else
             EventList= [EventList; ARRIVAL_S Clock+exprnd(invlambda) 0];
@@ -56,13 +55,12 @@ while NARRIVALS < R + N
         
         % find most available server
         loadbalancer = find(STATE==min(STATE));
-        loadbalancer = loadbalancer(1);
+        loadbalancer = loadbalancer(1); % pick just one server
         
-        if event == ARRIVAL_S
-            % process standard video
+        if event == ARRIVAL_S % arrival standard video
             NARRIVALS_S = NARRIVALS_S + 1;
             
-            % regras de aceitacao
+            % ter banda para Standard e reserva disponivel
             if STATE(loadbalancer) + Ms + W <= N_C
                 
                 STATE(loadbalancer) = STATE(loadbalancer) + Ms;
@@ -72,11 +70,11 @@ while NARRIVALS < R + N
                 BLOCKED_S = BLOCKED_S + 1;
             end
             
-        else
-            % process high def video
+        else % arrival high def video
+            
             NARRIVALS_H = NARRIVALS_H + 1;
             
-            % regras de aceitacao ou bloqueio
+            % servidor tem que ter pelo menos banda Mh disponivel
             if STATE(loadbalancer) + Mh <= N_C
                 
                 STATE(loadbalancer) = STATE(loadbalancer) + Mh;
@@ -88,9 +86,7 @@ while NARRIVALS < R + N
             
         end
         
-    else
-        % departures
-        
+    else % departures
         if event == DEPARTURE_S
             STATE(node_id) = STATE(node_id) - Ms;
         else
@@ -103,6 +99,7 @@ while NARRIVALS < R + N
     NARRIVALS = NARRIVALS_S + NARRIVALS_H;
     
     if NARRIVALS == N
+        % reset stats and start counting only afer N arrivals
         BLOCKED_S = 0;
         BLOCKED_H = 0;
     elseif NARRIVALS > N
