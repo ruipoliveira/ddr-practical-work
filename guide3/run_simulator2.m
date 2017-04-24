@@ -5,7 +5,7 @@ W = [0 60 80 0 180 240];
 
 %ex3_a(lambda, S, W)
 %ex3_b()
-ex3_c()
+%ex3_c()
 
 function ex3_a(lambda, S, W)
 p = 0.4;
@@ -13,7 +13,7 @@ invmiu = 90;
 Ms = 2;
 Mh = 5;
 R = 10000;
-N = 1000;
+N = 10000;
 
 for i=1:size(lambda,2)
     [b_s, b_h] = simulator2(lambda(i), p, invmiu, S(i), W(i), Ms, Mh, R, N);
@@ -33,8 +33,8 @@ lambda = lambda * subscribers;
 invmiu = 90;
 Ms = 2;
 Mh = 5;
-R = 10000;
-N = 1000;       % one month warm up
+R = 100000;
+N = 10000;       % one month warm up
 
 b_s = zeros(1,100);
 b_h = zeros(1,100);
@@ -59,13 +59,13 @@ Mh = 5;
 R = 10000;
 N = 10000;
 
-S_limit = 15;
+S_limit = 50;
 W_limit = 50;
 
 b_s = zeros(W_limit, S_limit);
 b_h = zeros(W_limit, S_limit);
 
-for S=1:S_limit
+for S=15:S_limit
     for W=0:W_limit
         [b_s(W+1,S), b_h(W+1,S)] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N);
         fprintf('W %.0f S %.0f: %.5f || %.5f\n', W, S, b_s(W+1,S), b_h(W+1,S))
@@ -89,7 +89,7 @@ surf(1:S_limit, 0:W_limit, worse_case)
 xlabel('Nr Servers');
 ylabel('W reservation');
 zlabel('Worst case');
-axis([1 S_limit 0 W_limit 0 0.5])
+%axis([1 S_limit 0 W_limit 0 0.5])
 view(70,27)
 grid on
 
