@@ -51,14 +51,15 @@ while NARRIVALS < R + N
         % find most available server
         loadbalancer = find(STATE==min(STATE));
         loadbalancer = loadbalancer(1); % pick just one server
-        
+        NARRIVALS = NARRIVALS + 1; 
+
         if event == ARRIVAL_S % arrival standard video
             
             EventList= [EventList; ARRIVAL_S Clock+exprnd(invlambda_S) 0];
             NARRIVALS_S = NARRIVALS_S + 1;
             
             % ter banda para Standard e reserva disponivel
-            if STATE(loadbalancer) + Ms <= N_C && STATE_S <= (C - W)
+            if STATE(loadbalancer) + Ms <= N_C && STATE_S + Ms<= (C - W)
                 
                 STATE(loadbalancer) = STATE(loadbalancer) + Ms;
                 STATE_S = STATE_S + Ms;
@@ -68,8 +69,7 @@ while NARRIVALS < R + N
                 BLOCKED_S = BLOCKED_S + 1;
             end
             
-        end
-        if event == ARRIVAL_H % arrival high def video
+        else % arrival high def video
             
             EventList= [EventList; ARRIVAL_H Clock+exprnd(invlambda_H) 0];
             NARRIVALS_H = NARRIVALS_H + 1;
@@ -98,12 +98,13 @@ while NARRIVALS < R + N
     end
     
     EventList= sortrows(EventList,2);
-    NARRIVALS = NARRIVALS_S + NARRIVALS_H;
     
     if NARRIVALS == N
         % reset stats and start counting only afer N arrivals
         BLOCKED_S = 0;
         BLOCKED_H = 0;
+        NARRIVALS_S = 0; 
+        NARRIVALS_H = 0; 
     end
     
 end
