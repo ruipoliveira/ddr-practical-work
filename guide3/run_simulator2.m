@@ -4,7 +4,7 @@ S = [1 1 1 3 3 3];
 W = [0 60 80 0 180 240];
 
 %ex3_a(lambda, S, W)
-%ex3_b()
+ex3_b()
 %ex3_c()
 
 function ex3_a(lambda, S, W)
@@ -13,11 +13,25 @@ invmiu = 90;
 Ms = 2;
 Mh = 5;
 R = 10000;
-N = 10000;
+N = 1000;
 
-for i=1:size(lambda,2)
-    [b_s, b_h] = simulator2(lambda(i), p, invmiu, S(i), W(i), Ms, Mh, R, N);
-    fprintf('%.3f || %.3f\n', b_s, b_h)
+runs = 40;
+test_count = size(lambda,2);
+
+b_s = zeros(test_count, runs);
+b_h = zeros(test_count, runs);
+
+b_s_confidence = zeros(test_count,2);
+b_h_confidence = zeros(test_count,2);
+
+for test_nr=1:size(lambda,2)
+    for lap=1:runs
+        [b_s(test_nr,lap), b_h(test_nr,lap)] = simulator2(lambda(test_nr), p, invmiu, S(test_nr), W(test_nr), Ms, Mh, R, N);
+    end
+    [b_s_confidence(test_nr,1), b_s_confidence(test_nr,2)] = confidence_level(0.1, b_s(test_nr,:), runs);
+    [b_h_confidence(test_nr,1), b_h_confidence(test_nr,2)] = confidence_level(0.1, b_h(test_nr,:), runs);
+    
+    fprintf('%.6f +- %.6f || %.6f +- %.6f\n', b_s_confidence(test_nr,1)*100, b_s_confidence(test_nr,2)*100, b_h_confidence(test_nr,1)*100, b_h_confidence(test_nr,2)*100);
 end
 
 end
@@ -28,23 +42,35 @@ p = 0.1;                % 10% of requests are HD
 
 subscribers = 8000;
 lambda = 1 / (24 * 7);  % 1 request / week. lambda is requests/hour
-lambda = lambda * subscribers; 
+lambda = lambda * subscribers;
 
 invmiu = 90;
 Ms = 2;
 Mh = 5;
-R = 100000;
-N = 10000;       % one month warm up
+R = 10000;
+N = 1000;       % one month warm up
 
 b_s = zeros(1,100);
 b_h = zeros(1,100);
 
-for W=1:100
-    [b_s(W), b_h(W)] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N);
-    fprintf('W %.0f: %.3f || %.3f\n', W, b_s(W), b_h(W))
+runs = 40;
+W_limit = 100;
+
+b_s_confidence = zeros(W_limit,2);
+b_h_confidence = zeros(W_limit,2);
+
+for W=1:W_limit
+    for lap=1:runs
+        [b_s(W,lap), b_h(W,lap)] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N);
+    end
+    [b_s_confidence(W,1), b_s_confidence(W,2)] = confidence_level(0.1, b_s(W,:), runs);
+    [b_h_confidence(W,1), b_h_confidence(W,2)] = confidence_level(0.1, b_h(W,:), runs);
+    
+    fprintf('W:%.0f : %.6f +- %.6f || %.6f +- %.6f\n', W, b_s_confidence(W,1)*100, b_s_confidence(W,2)*100, b_h_confidence(W,1)*100, b_h_confidence(W,2)*100);
 end
 
-plot(1:100,b_s, 1:100, b_h);
+
+plot(1:W_limit,b_s_confidence, 1:W_limit, b_h_confidence);
 
 end
 

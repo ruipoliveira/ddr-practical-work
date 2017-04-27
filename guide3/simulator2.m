@@ -51,8 +51,9 @@ while NARRIVALS < R + N
         % find most available server
         loadbalancer = find(STATE==min(STATE));
         loadbalancer = loadbalancer(1); % pick just one server
-        NARRIVALS = NARRIVALS + 1; 
 
+        NARRIVALS = NARRIVALS + 1;
+        
         if event == ARRIVAL_S % arrival standard video
             
             EventList= [EventList; ARRIVAL_S Clock+exprnd(invlambda_S) 0];
