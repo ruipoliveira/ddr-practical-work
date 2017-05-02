@@ -1,4 +1,4 @@
-function [b_s, b_h]= simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N)
+function [b_s, b_h] = simulator2(lambda, p, invmiu, S, W, Ms, Mh, R, N)
 %lambda = movies request rate (in requests/hour)
 %p = percentage of requests for high-definition movies (in %)
 %invmiu= average duration of movies (in minutes)
