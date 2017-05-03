@@ -136,7 +136,9 @@ grid on
 % a = [2,2,3;0,2,5;1 2 3]
 % [row,column]=find(a==min(min(a(a>0))))
 
-[W_optimal, S_optimal] = find(worse_case==min(min(worse_case(worse_case>0))))
+[W_optimal, S_optimal] = find(worse_case==min(min(worse_case(worse_case>=0.001))))
+menos_um_server=worse_case(:,1:5);
+[W_optimal, S_optimal] = find(menos_um_server==min(min(menos_um_server)))
 
 w=1
 end
