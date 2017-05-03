@@ -69,14 +69,10 @@ for W=1:W_limit
     fprintf('W:%.0f : %.6f +- %.6f || %.6f +- %.6f\n', W, b_s_confidence(W,1)*100, b_s_confidence(W,2)*100, b_h_confidence(W,1)*100, b_h_confidence(W,2)*100);
 end
 
+k = 5
 plot(1:W_limit,b_s_confidence(:,1), 1:W_limit, b_h_confidence(:,1));
 
-dist = zeros(1,W_limit);
-for i=1:W_limit
-    dist(i)= abs(b_s_confidence(i,1) - b_h_confidence(i,1));
-end
-
-find(dist==min(dist))
+for i=1:size(b_s_confidence,1)
 
 end
 

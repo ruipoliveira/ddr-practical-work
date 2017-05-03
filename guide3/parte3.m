@@ -2,6 +2,7 @@ G= [ 1 2; 1 3; 1 4; 1 5; 1 6; 1 14; 1 15; 2 3; 2 4; 2 5; 2 7; 2 8; 3 4; 3 5; 3 8
 
 % 5 servidores tier 1
 n = max(max(G)) - 5
+N = 40;
 
 % custos 
 C(1:5) = 10;
@@ -10,15 +11,20 @@ C(16:40) = 6;
 
 I = zeros(1,40);
 
-ASs_label = 1:40;
 
-for i=1:40
+for i=1:N
     
-    for j=1:40
+    AS_labels = zeros(1,N)
+    
+    for j=1:N
         if(j==1)
-            ASs_label(j) = 1;
+            ASs_label(j) = 0;
         end
         
         ASs_label(j) = -1;
     end
+    
+    for j=1:size
+    
+    
 end
