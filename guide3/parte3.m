@@ -4,17 +4,16 @@ G= [ 1 2; 1 3; 1 4; 1 5; 1 6; 1 14; 1 15; 2 3; 2 4; 2 5; 2 7; 2 8; 3 4; 3 5; 3 8
 n = max(max(G)) - 5
 N = 40;
 
-% custos 
+% custos
 C(1:5) = 10;
 C(6:15) = 8;
 C(16:40) = 6;
 
 I = zeros(1,40);
 
+AS_labels = zeros(1,N)
 
 for i=1:N
-    
-    AS_labels = zeros(1,N)
     
     for j=1:N
         if(j==1)
@@ -24,17 +23,22 @@ for i=1:N
         ASs_label(j) = -1;
     end
     
-    a=0;
-    for j=1:size
+    
+    
+end
+
+for a=0:1
+    for j=1:size(G,1)
         p1 = G(j,1);
         p2 = G(j,2);
         
         if (p1 == a && p2 == -1)
+            AS_labels(p2) = a+1;
             
-        else
+        elseif (p1 == -1 && p2 == a)
+            AS_labels(p1) = a+1;
+            
         end
         
     end
-    
-    
 end
