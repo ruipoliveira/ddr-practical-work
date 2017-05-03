@@ -24,7 +24,17 @@ for i=1:N
         ASs_label(j) = -1;
     end
     
+    a=0;
     for j=1:size
+        p1 = G(j,1);
+        p2 = G(j,2);
+        
+        if (p1 == a && p2 == -1)
+            
+        else
+        end
+        
+    end
     
     
 end
