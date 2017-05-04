@@ -5,40 +5,39 @@ n = max(max(G)) - 5
 N = 40;
 
 % custos
-C(1:5) = 10;
 C(6:15) = 8;
 C(16:40) = 6;
 
-I = zeros(1,40);
+I = zeros(40,40) -1;
 
-AS_labels = zeros(1,N)
-
-for i=1:N
+for i=6:size(I,2)
     
-    for j=1:N
-        if(j==1)
-            ASs_label(j) = 0;
+    I(i,i) = 0;
+    
+    for a=0:1
+        for j=1:size(G,1)
+            p1 = I(i,G(j,1));
+            p2 = I(i,G(j,2));
+            
+            if (p1 == a && p2 == -1)
+                I(i,G(j,2)) = a+1;
+                
+            elseif (p1 == -1 && p2 == a)
+                I(i,G(j,1)) = a+1;
+            end
+            
         end
-        
-        ASs_label(j) = -1;
     end
-    
-    
     
 end
 
-for a=0:1
-    for j=1:size(G,1)
-        p1 = G(j,1);
-        p2 = G(j,2);
-        
-        if (p1 == a && p2 == -1)
-            AS_labels(p2) = a+1;
-            
-        elseif (p1 == -1 && p2 == a)
-            AS_labels(p1) = a+1;
-            
-        end
-        
+
+%% gerar ILP
+fid = fopen('ex3.lp','wt');
+fprintf(fid,'Minimize\n');
+for i=6:40
+    for j=1:40
+        fprintf(fid,' + y%d,%d',i,j);
     end
+    fprintf(fid,' - x%d = 0\n',i);
 end
