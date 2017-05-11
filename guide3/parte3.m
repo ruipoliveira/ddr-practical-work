@@ -31,7 +31,6 @@ for i=6:size(I,2)
     
 end
 
-
 %% gerar ILP
 fid = fopen('ex3.lp','wt');
 fprintf(fid,'Minimize\n');
