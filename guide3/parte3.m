@@ -35,34 +35,39 @@ end
 
 %% gerar ILP
 
-fid = fopen('ex3.lp','wt');
+%nosso
+% custos
+C(6:15) = 8;
+C(16:40) = 6;
+
+fid = fopen('ex3_minimize.lp','wt');
 fprintf(fid,'Minimize\n');
-for i=1:N
+for i=6:40
     fprintf(fid,' + %f x%d',C(i),i);
 end
+
 fprintf(fid,'\nSubject To\n');
-
-
-for j=1:v
-    for i=1:N
-        fprintf(fid,' + %f y%d,%d',s(i),i,j);
+%for j=6:40
+for j=1:40
+    for i=1:40
+        if I(i,j) ~= -1 && I(i,j) ~= 0
+            fprintf(fid,' + %f y%d,%d',I(i,j),i,j);
+        end
     end
-    fprintf(fid,' <= %f\n',c(j));
+    fprintf(fid,' <= %f \n',1);
 end
-for i=1:N
-    for j=1:v
+for i=1:40
+    for j=1:40
         fprintf(fid,' + y%d,%d',i,j);
     end
-    fprintf(fid,' - x%d = 0\n',i);
+    fprintf(fid,' - x%d = 1\n',i);
 end
-
 fprintf(fid,'Binary\n');
-for i=1:N
+for i=1:40
     fprintf(fid,' x%d\n',i);
-    for j=1:v
+    for j=1:40
         fprintf(fid,' y%d,%d\n',i,j);
     end
 end
-
 fprintf(fid,'End\n');
 fclose(fid);
