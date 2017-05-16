@@ -48,25 +48,30 @@ end
 
 fprintf(fid,'\nSubject To\n');
 %for j=6:40
-for j=1:40
-    for i=1:40
-        if I(i,j) ~= -1 && I(i,j) ~= 0
-            fprintf(fid,' + %f y%d,%d',I(i,j),i,j);
+for j=6:40
+    for i=6:40
+        if I(i,j) > -1
+            fprintf(fid,' + y%d,%d',j,i);
         end
     end
-    fprintf(fid,' <= %f \n',1);
+    fprintf(fid,' =  1\n');
 end
-for i=1:40
-    for j=1:40
-        fprintf(fid,' + y%d,%d',i,j);
+for j=6:40
+    for i=6:40
+        if I(i,j) > -1
+              fprintf(fid,' + y%d,%d - x%d <= 0\n',j,i,i);
+        end
     end
-    fprintf(fid,' - x%d = 1\n',i);
 end
 fprintf(fid,'Binary\n');
-for i=1:40
+for i=6:40
     fprintf(fid,' x%d\n',i);
-    for j=1:40
-        fprintf(fid,' y%d,%d\n',i,j);
+end
+for j=6:40
+    for i=6:40
+        if I(i,j) > -1
+              fprintf(fid,' y%d,%d\n',j,i);
+        end
     end
 end
 fprintf(fid,'End\n');
