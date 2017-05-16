@@ -2,20 +2,18 @@ G= [ 1 2; 1 3; 1 4; 1 5; 1 6; 1 14; 1 15; 2 3; 2 4; 2 5; 2 7; 2 8; 3 4; 3 5; 3 8
 
 % 5 servidores tier 1
 n = max(max(G)) - 5; 
-N = 40;
+N = 40; % nr AS
 
-% custos
-C(6:15) = 8;
-C(16:40) = 6;
+% custos ignorar tier 1 AS
+C(6:15) = 8; % tier 2 AS
+C(16:N) = 6; % tier 3 AS
 
-I = zeros(40,40) -1;
+I = zeros(N,N) -1;
 
 v = length(I); 
 
 for i=6:size(I,2)
-    
     I(i,i) = 0;
-    
     for a=0:1
         for j=1:size(G,1)
             p1 = I(i,G(j,1));
@@ -35,40 +33,35 @@ end
 
 %% gerar ILP
 
-%nosso
-% custos
-C(6:15) = 8;
-C(16:40) = 6;
-
 fid = fopen('ex3_minimize.lp','wt');
 fprintf(fid,'Minimize\n');
-for i=6:40
+for i=6:N
     fprintf(fid,' + %f x%d',C(i),i);
 end
 
 fprintf(fid,'\nSubject To\n');
-%for j=6:40
-for j=6:40
-    for i=6:40
+%for j=6:N
+for j=6:N
+    for i=6:N
         if I(i,j) > -1
             fprintf(fid,' + y%d,%d',j,i);
         end
     end
     fprintf(fid,' =  1\n');
 end
-for j=6:40
-    for i=6:40
+for j=6:N
+    for i=6:N
         if I(i,j) > -1
               fprintf(fid,' + y%d,%d - x%d <= 0\n',j,i,i);
         end
     end
 end
 fprintf(fid,'Binary\n');
-for i=6:40
+for i=6:N
     fprintf(fid,' x%d\n',i);
 end
-for j=6:40
-    for i=6:40
+for j=6:N
+    for i=6:N
         if I(i,j) > -1
               fprintf(fid,' y%d,%d\n',j,i);
         end
