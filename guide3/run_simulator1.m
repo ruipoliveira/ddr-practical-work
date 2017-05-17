@@ -74,8 +74,8 @@ end
 %% alinea 2.2 b)
 function ex2_2b(M, C_all, lambda_all, minutes_all)
 
-N = 1000; % nr de simulacoes
-R=10000;
+N = 1000; % simula so depois da Nth chegada
+R = 10000;
 
 [b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 10);
 
@@ -100,7 +100,7 @@ caseJ_minutes = 95;
 caseJ_C = 1000;
 
 R = 10000;
-N= 100;
+N= 1000;
 
 [b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 100);
 
