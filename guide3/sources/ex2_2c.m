@@ -1,14 +1,14 @@
 %% alinea 2.2 c)
-function ex2_2c(M, ~, ~, ~)
+function ex2_2c(M)
 
 caseJ_lambda = 300;
 caseJ_minutes = 95;
 caseJ_C = 1000;
 
 R = 10000;
-N= 100;
+N= 1000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 1);
+[b, o] = simulator1_new_wrapper(M, caseJ_C, caseJ_lambda, caseJ_minutes, R, N, 100);
 
 % print results
 
@@ -17,12 +17,7 @@ N= 100;
 fprintf('Case J = %.2e +- %.2e || ', b_avg, b_termo)
 fprintf('%.2e +- %.2e\n',o_avg, o_termo)
 
-
 end
 
 M = 2;
-C_all = [10 10 10 10 100 100 100 100 1000 1000 1000 1000];
-lambda_all = [1.0 1.0 1.5 1.5 25 25 30 30 300 300 350 350];
-minutes_all = [90 95 90 95 90 95 90 95 90 95 90 95];
-
-ex2_2c(M, C_all, lambda_all, minutes_all);
+ex2_2c(M);

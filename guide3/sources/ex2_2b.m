@@ -1,11 +1,10 @@
-
 %% alinea 2.2 b)
 function ex2_2b(M, C_all, lambda_all, minutes_all)
 
-N = 1000; % nr de simulacoes
-R=10000;
+N = 1000; % simula so depois da Nth chegada
+R = 10000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 1);
+[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 10);
 
 b_confidence = zeros(size(C_all,2),2);
 o_confidence = zeros(size(C_all,2),2);

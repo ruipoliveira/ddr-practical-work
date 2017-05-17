@@ -1,4 +1,3 @@
-
 %% alinea 2.2 a)
 function ex2_2a(M, C_all, lambda_all, minutes_all)
 

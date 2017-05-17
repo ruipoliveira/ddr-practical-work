@@ -5,9 +5,9 @@ lambda_all = [1.0 1.0 1.5 1.5 25 25 30 30 300 300 350 350];
 minutes_all = [90 95 90 95 90 95 90 95 90 95 90 95];
 
 %ex2_2a(M, C_all, lambda_all, minutes_all);
-ex2_2b(M, C_all, lambda_all, minutes_all);
-%ex2_2c(M, C_all, lambda_all, minutes_all);
-%ex2_2d(M, C_all, lambda_all, minutes_all);
+%ex2_2b(M, C_all, lambda_all, minutes_all);
+%ex2_2c(M);
+ex2_2d(M);
 
 
 %% runs simulator1 according to the tests
@@ -102,7 +102,7 @@ caseJ_C = 1000;
 R = 10000;
 N= 1000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 100);
+[b, o] = simulator1_new_wrapper(M, caseJ_C, caseJ_lambda, caseJ_minutes, R, N, 100);
 
 % print results
 
@@ -118,14 +118,14 @@ end
 %% alinea 2.2 d)
 function ex2_2d(M, ~, ~, ~)
 
+caseJ_C = 1000;
 caseJ_lambda = 300;
 caseJ_minutes = 95;
-caseJ_C = 1000;
 
 R = 100000;
 N= 1000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 10);
+[b, o] = simulator1_new_wrapper(M, caseJ_C, caseJ_lambda, caseJ_minutes, R, N, 10);
 
 % print results
 
