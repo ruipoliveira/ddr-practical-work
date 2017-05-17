@@ -77,7 +77,7 @@ function ex2_2b(M, C_all, lambda_all, minutes_all)
 N = 1000; % nr de simulacoes
 R=10000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 1);
+[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 10);
 
 b_confidence = zeros(size(C_all,2),2);
 o_confidence = zeros(size(C_all,2),2);
@@ -102,7 +102,7 @@ caseJ_C = 1000;
 R = 10000;
 N= 100;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 1);
+[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 100);
 
 % print results
 
@@ -125,7 +125,7 @@ caseJ_C = 1000;
 R = 100000;
 N= 1000;
 
-[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 1);
+[b, o] = simulator1_new_wrapper(M, C_all, lambda_all, minutes_all, R, N, 10);
 
 % print results
 

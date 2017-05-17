@@ -62,6 +62,7 @@ for j=6:40
             fprintf(fid,' + y%d,%d - x%d <= 0\n',j,i,i);
         end
     end
+    fprintf(fid,' - x%d = 1\n',i);
 end
 fprintf(fid,'Binary\n');
 for i=6:40
