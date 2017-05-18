@@ -1,3 +1,4 @@
+% R(i,j) gives the capacity (in Gbps) of the connection from node i to node j 
 R= [0  1  0  0  1   0  0   0   0   0  1  0  0  0  0  0  0
     1  0  1  0  1   0  0   0   0   0  0  0  0  0  0  0  0
     0  1  0  1  0   1  0   0   0   0  0  0  0  0  0  0  0
@@ -16,6 +17,8 @@ R= [0  1  0  0  1   0  0   0   0   0  1  0  0  0  0  0  0
     0  0  0  0  0   0  0   0   0   0  0  1  0  0  0  0  1
     0  0  0  0  0   0  0   0   0   0  0  0  0  0  1  1  0];
 
+% connection lengths (in kilometers) where element L(i,j) indicates 
+% the length of the connection from node i to node j
 L= [0   119 0   0   147 0   0   0   0   0   292 0   0   0   0   0   0
     119 0   61  0   105 0   0   0   0   0   0   0   0   0   0   0   0
     0   61  0   40  0   136 0   0   0   0   0   0   0   0   0   0   0
@@ -34,6 +37,7 @@ L= [0   119 0   0   147 0   0   0   0   0   292 0   0   0   0   0   0
     0   0   0   0   0   0   0   0   0   0   0   61  0   0   0   0   81
     0   0   0   0   0   0   0   0   0   0   0   0   0   0   45  81  0];
 
+% defines the average traffic bandwidth sent from node i to node j, in mbps
 T=  [0	32	78	23	0	60	0	0	0	13	14	15	25	55	17	14	12
     60	0	80	38	0	290	0	0	0	51	78	70	51	280	42	64	54
     82	84	0	11	0	260	0	0	0	19	15	48	17	84	18	19	15
