@@ -6,7 +6,7 @@ minutes_all = [90 95 90 95 90 95 90 95 90 95 90 95];
 
 %ex2_2a(M, C_all, lambda_all, minutes_all);
 %ex2_2b(M, C_all, lambda_all, minutes_all);
-%ex2_2c(M);
+ex2_2c(M);
 ex2_2d(M);
 
 
