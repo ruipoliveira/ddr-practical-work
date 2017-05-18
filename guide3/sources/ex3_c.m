@@ -65,12 +65,6 @@ grid on
 menos_um_server=worse_case(:,1:5);
 [W_optimal, S_optimal] = find(menos_um_server==min(min(menos_um_server)))
 
-w=1
 end
-
-
-lambda = [13 13 13 50 50 50];
-S = [1 1 1 3 3 3];
-W = [0 60 80 0 180 240];
 
 ex3_c()
