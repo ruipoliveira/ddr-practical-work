@@ -7,27 +7,27 @@ d= L*1e3/2e8;
 pairs= [];
 
 for origin=1:16
-	for destination=(origin+1):17
-		if T(origin,destination)+T(destination,origin)>0
-		pairs= [pairs; origin destination];
-		end
-	end
+    for destination=(origin+1):17
+        if T(origin,destination)+T(destination,origin)>0
+            pairs= [pairs; origin destination];
+        end
+    end
 end
 npairs= size(pairs,1);
 lambda= zeros(17);
 routes= zeros(npairs,17);
 
 for i=1:npairs
-	origin= pairs(i,1);
-	destination= pairs(i,2);
-	r= ShortestPathSym(d,origin,destination);
-	routes(i,:)= r;
-	j= 1;
-	while r(j)~= destination
-		lambda(r(j),r(j+1))= lambda(r(j),r(j+1)) + lambda_s(origin,destination);
-		lambda(r(j+1),r(j))= lambda(r(j+1),r(j)) + lambda_s(destination,origin);
-		j= j+1;
-	end
+    origin= pairs(i,1);
+    destination= pairs(i,2);
+    r= ShortestPathSym(d,origin,destination);
+    routes(i,:)= r;
+    j= 1;
+    while r(j)~= destination
+        lambda(r(j),r(j+1))= lambda(r(j),r(j+1)) + lambda_s(origin,destination);
+        lambda(r(j+1),r(j))= lambda(r(j+1),r(j)) + lambda_s(destination,origin);
+        j= j+1;
+    end
 end
 Load= lambda./miu;
 Load(isnan(Load))= 0;
@@ -39,15 +39,15 @@ AverageDelay= 2*sum(sum(AverageDelay))/gama
 Delay_s= zeros(npairs,1);
 
 for i=1:npairs
-	origin= pairs(i,1);
-	destination= pairs(i,2);
-	r= routes(i,:);
-	j= 1;
-	while r(j)~= destination
-		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j),r(j+1)) - lambda(r(j),r(j+1))) + d(r(j),r(j+1));
-		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j+1),r(j)) - lambda(r(j+1),r(j))) + d(r(j+1),r(j));
-		j= j+1;
-	end
+    origin= pairs(i,1);
+    destination= pairs(i,2);
+    r= routes(i,:);
+    j= 1;
+    while r(j)~= destination
+        Delay_s(i)= Delay_s(i)+ 1/(miu(r(j),r(j+1)) - lambda(r(j),r(j+1))) + d(r(j),r(j+1));
+        Delay_s(i)= Delay_s(i)+ 1/(miu(r(j+1),r(j)) - lambda(r(j+1),r(j))) + d(r(j+1),r(j));
+        j= j+1;
+    end
 end
 
 MaxAvDelay= max(Delay_s)
