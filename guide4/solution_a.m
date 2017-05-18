@@ -24,10 +24,8 @@ for i=1:npairs
 	routes(i,:)= r;
 	j= 1;
 	while r(j)~= destination
-		lambda(r(j),r(j+1))= lambda(r(j),r(j+1)) + ...
-		lambda_s(origin,destination);
-		lambda(r(j+1),r(j))= lambda(r(j+1),r(j)) + ...
-		lambda_s(destination,origin);
+		lambda(r(j),r(j+1))= lambda(r(j),r(j+1)) + lambda_s(origin,destination);
+		lambda(r(j+1),r(j))= lambda(r(j+1),r(j)) + lambda_s(destination,origin);
 		j= j+1;
 	end
 end
@@ -46,10 +44,8 @@ for i=1:npairs
 	r= routes(i,:);
 	j= 1;
 	while r(j)~= destination
-		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j),r(j+1))-...
-		lambda(r(j),r(j+1))) + d(r(j),r(j+1));
-		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j+1),r(j))-...
-		lambda(r(j+1),r(j))) + d(r(j+1),r(j));
+		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j),r(j+1)) - lambda(r(j),r(j+1))) + d(r(j),r(j+1));
+		Delay_s(i)= Delay_s(i)+ 1/(miu(r(j+1),r(j)) - lambda(r(j+1),r(j))) + d(r(j+1),r(j));
 		j= j+1;
 	end
 end
