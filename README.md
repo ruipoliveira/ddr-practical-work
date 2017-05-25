@@ -10,6 +10,11 @@
 * [guide (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide2/pdf/Guide2_DDR_16_17.pdf)
 * [report portuguese version (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide2/pdf/DDR_work2.pdf)
 
+### Guide 3: Blocking performance of video-streaming services
+
+* [guide (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide3/pdf/Guide3_DDR_16_17.pdf)
+* [report portuguese version (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide3/pdf/DDR_work3.pdf)
+
 
 ### Authors
 
