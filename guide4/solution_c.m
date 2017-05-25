@@ -22,10 +22,8 @@ for i=1:npairs
     origin= pairs(i,1);
     destination= pairs(i,2);
 
-    %AverageDelay= (lambda./(miu-lambda)+lambda.*d);
-    %AverageDelay(isnan(AverageDelay))= 0;
-    AverageDelay = 1./(miu-lambda) + d; 
-    r= ShortestPathSym(AverageDelay,origin,destination);
+    aux = 1./(miu-lambda) + d; % M/M/1 Atraso médio no sistema Modulo 2 slides 
+    r= ShortestPathSym(aux,origin,destination);
     
     routes(i,:)= r;
     j= 1;
