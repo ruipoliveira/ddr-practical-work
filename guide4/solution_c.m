@@ -21,8 +21,12 @@ routes= zeros(npairs,17);
 for i=1:npairs
     origin= pairs(i,1);
     destination= pairs(i,2);
-    Load= lambda./miu;
-    r= ShortestPathSym(Load,origin,destination);
+
+    %AverageDelay= (lambda./(miu-lambda)+lambda.*d);
+    %AverageDelay(isnan(AverageDelay))= 0;
+    AverageDelay = 1./(miu-lambda) + d; 
+    r= ShortestPathSym(AverageDelay,origin,destination);
+    
     routes(i,:)= r;
     j= 1;
     while r(j)~= destination
