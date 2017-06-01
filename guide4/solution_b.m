@@ -3,7 +3,7 @@ miu= R*1e9/(8*1000);            % capacidade em bits / pacotes de 1000bytes -> p
 NumberLinks= sum(sum(R>0));     % numero total de ligacoes
 lambda_s= T*1e6/(8*1000);       % packet arrival rate
 gama= sum(sum(lambda_s));       % trafego total na rede (packets/sec)
-d= L*1e3/2e8;                   % velocidade propagacao / vel da luz na fibra optica
+d= L*1e3/2e8;                   % velocidade propagacao / vel da luz na fibra optica 
 pairs= [];
 
 % descobrir nos ligados por um path bidirecional
@@ -21,7 +21,7 @@ routes= zeros(npairs,17);
 for i=1:npairs
     origin= pairs(i,1);
     destination= pairs(i,2);
-    Loads= lambda./miu; % minimizar solucao; caga maxima menos significativa
+    Loads= lambda./miu; % minimizar solucao; caga maxima menos significativa 
     r= ShortestPathSym(Loads,origin,destination);
     routes(i,:)= r;
     j= 1;
