@@ -15,7 +15,7 @@ for q=1:length(n)
             NeighbourBest= Inf;
             
             % evaluate the best neighbour
-            for i=1:size(CurrentSolution,1)
+            for i=1:size(CurrentSolution.pairs,1) % size de um struct?
                 NeighbourSolution= BuildNeighbourLoad(CurrentSolution,i);
                 NeighbourObjective= EvaluateLoad(NeighbourSolution);
                 if NeighbourObjective < NeighbourBest

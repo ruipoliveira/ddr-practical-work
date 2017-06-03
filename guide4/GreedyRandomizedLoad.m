@@ -41,6 +41,7 @@ for i=1:npairs
     routes(i,:) = r;
     
     j= 1;
+    % adiciona a carga as routes
     while r(j) ~= destination
         lambda(r(j), r(j+1)) = lambda(r(j), r(j+1)) + lambda_s(origin, destination);
         lambda(r(j+1), r(j)) = lambda(r(j+1), r(j)) + lambda_s(destination, origin);

@@ -9,7 +9,7 @@ origin = solution.pairs(i,1);
 destination = solution.pairs(i,2);
 r = solution.routes(i,:);
 
-% compute the lambda(pckts/s) from our origin up to the destination
+% remove as cargas deste link
 j = 1;
 while r(j) ~= destination
     solution.lambda(r(j),r(j+1)) = solution.lambda(r(j),r(j+1)) - lambda_s(origin,destination);
@@ -17,10 +17,7 @@ while r(j) ~= destination
     j= j+1;
 end
 
-%
-% DELETE ME
-% PQ DUAS VEZES O WHILE?
-%
+% recalcula o caminho mais curto
 
 Load= solution.lambda./miu;
 r = ShortestPathSym(Load, origin, destination);
