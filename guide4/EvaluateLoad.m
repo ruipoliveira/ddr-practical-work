@@ -1,4 +1,4 @@
-function ConnectionLoad = EvaluateLoad(solution)
+function metric = EvaluateLoad(solution)
 
 %pairs = neighbourSolution.pairs;
 %routes = neighbourSolution.routes;
@@ -10,8 +10,14 @@ lambda_s= T*1e6/(8*1000);       % packet arrival rate
 gama= sum(sum(lambda_s));       % trafego total na rede (packets/sec)
 d= L*1e3/2e8;                   % velocidade propagacao / vel da luz na fibra optica
 
-ConnectionLoad= (lambda./(miu-lambda)+lambda);
-ConnectionLoad(isnan(ConnectionLoad))= 0;
-ConnectionLoad= 2*sum(sum(ConnectionLoad))/gama;
+NumberLinks= sum(sum(R>0));
+
+Load= lambda./miu;
+Load(isnan(Load))= 0;
+MinumunLoad= min(min(Load));
+MaximumLoad= max(max(Load));
+AverageLoad= sum(sum(Load))/NumberLinks;
+
+metric = MaximumLoad;
 
 end

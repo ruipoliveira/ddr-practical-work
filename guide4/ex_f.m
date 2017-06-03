@@ -1,13 +1,13 @@
 % lowest maximum connection load
 
-n = [ 3 10 30];
+n = [ 3 10 30 300];
 
 for q=1:length(n)
     GlobalBest= Inf;
     Iterations = n(q);
     for iter=1:Iterations
         
-        CurrentSolution= GreedyRandomized();
+        CurrentSolution= GreedyRandomizedLoad();
         CurrentObjective= EvaluateLoad(CurrentSolution);
         
         repeat= true;
@@ -16,7 +16,7 @@ for q=1:length(n)
             
             % evaluate the best neighbour
             for i=1:size(CurrentSolution,1)
-                NeighbourSolution= BuildNeighbour(CurrentSolution,i);
+                NeighbourSolution= BuildNeighbourLoad(CurrentSolution,i);
                 NeighbourObjective= EvaluateLoad(NeighbourSolution);
                 if NeighbourObjective < NeighbourBest
                     NeighbourBest= NeighbourObjective;
