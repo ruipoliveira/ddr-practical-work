@@ -1,5 +1,4 @@
-% Develop a multi-start local search optimization algorithm for n cycles, where n is an
-% input parameter, to find a solution with the lowest network average round-trip delay
+% lowest maximum connection load
 
 n = [ 3 10 30];
 
@@ -9,7 +8,7 @@ for q=1:length(n)
     for iter=1:Iterations
         
         CurrentSolution= GreedyRandomized();
-        CurrentObjective= EvaluateAverageDelay(CurrentSolution);
+        CurrentObjective= EvaluateLoad(CurrentSolution);
         
         repeat= true;
         while repeat
@@ -18,7 +17,7 @@ for q=1:length(n)
             % evaluate the best neighbour
             for i=1:size(CurrentSolution,1)
                 NeighbourSolution= BuildNeighbour(CurrentSolution,i);
-                NeighbourObjective= EvaluateAverageDelay(NeighbourSolution);
+                NeighbourObjective= EvaluateLoad(NeighbourSolution);
                 if NeighbourObjective < NeighbourBest
                     NeighbourBest= NeighbourObjective;
                     NeighbourBestSolution= NeighbourSolution;
@@ -42,4 +41,3 @@ for q=1:length(n)
     end
     fprintf('Iterations: %d\t GlobalBest: %0.8f\n', Iterations, GlobalBest);
 end
-
