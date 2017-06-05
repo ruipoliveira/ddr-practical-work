@@ -14,9 +14,9 @@ NumberLinks= sum(sum(R>0));
 
 Load= lambda./miu;
 Load(isnan(Load))= 0;
-MinumunLoad= min(min(Load));
+%MinumunLoad= min(min(Load));
 MaximumLoad= max(max(Load));
-AverageLoad= sum(sum(Load))/NumberLinks;
+%AverageLoad= sum(sum(Load))/NumberLinks;
 
 metric = MaximumLoad;
 

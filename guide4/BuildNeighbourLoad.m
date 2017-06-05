@@ -20,7 +20,7 @@ end
 % recalcula o caminho mais curto
 
 Load= solution.lambda./miu;
-r = ShortestPathSym(Load, origin, destination);
+r = ShortestPathSym(Load.^2, origin, destination);
 solution.routes(i,:) = r;
 
 j = 1;

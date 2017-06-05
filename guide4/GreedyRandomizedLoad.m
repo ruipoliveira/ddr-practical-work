@@ -36,7 +36,7 @@ for i=1:npairs
     destination= pairs(i,2);
     
     Load= lambda./miu;
-    r = ShortestPathSym(Load, origin, destination);
+    r = ShortestPathSym(Load.^2, origin, destination);
     
     routes(i,:) = r;
     

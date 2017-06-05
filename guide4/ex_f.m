@@ -1,6 +1,6 @@
 % lowest maximum connection load
 
-n = [ 3 10 30 300];
+n = [ 3 10 30 300 1000];
 
 for q=1:length(n)
     GlobalBest= Inf;

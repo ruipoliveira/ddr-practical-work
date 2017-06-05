@@ -17,11 +17,6 @@ while r(j) ~= destination
     j= j+1;
 end
 
-%
-% DELETE ME
-% PQ DUAS VEZES O WHILE?
-%
-
 delay = (1./(miu - solution.lambda) + d);           % delay as a metric
 r = ShortestPathSym(delay, origin, destination);
 solution.routes(i,:) = r;
