@@ -1,7 +1,7 @@
 % Develop a multi-start local search optimization algorithm for n cycles, where n is an
 % input parameter, to find a solution with the lowest network average round-trip delay
 
-n = [ 3 10 30];
+n = [ 3 10 30 300 1000];
 
 for q=1:length(n)
     GlobalBest= Inf;
@@ -41,5 +41,6 @@ for q=1:length(n)
         end
     end
     fprintf('Iterations: %d\t GlobalBest: %0.8f\n', Iterations, GlobalBest);
+    fprintf('--Highest avg: %d\t Max load %0.2f\n\n',EvaluateHighestDelay(GlobalBestSolution), EvaluateLoad(GlobalBestSolution));
 end
 
