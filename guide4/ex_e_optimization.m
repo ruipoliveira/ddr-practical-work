@@ -41,6 +41,6 @@ for q=1:length(n)
         end
     end
     fprintf('Iterations: %d\t GlobalBest: %0.8f\n', Iterations, GlobalBest);
-    fprintf('--Highest avg: %d\t Max load %0.2f\n\n',EvaluateHighestDelay(GlobalBestSolution), EvaluateLoad(GlobalBestSolution));
+    fprintf('--Max load %0.2f\n\n',EvaluateLoad(GlobalBestSolution));
 end
 
