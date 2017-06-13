@@ -4,6 +4,7 @@ n = [ 3 10 30 300 1000];
 
 for q=1:length(n)
     GlobalBest= Inf;
+    HighestAverage = 0;
     Iterations = n(q);
     for iter=1:Iterations
         
@@ -37,8 +38,14 @@ for q=1:length(n)
         if CurrentObjective < GlobalBest
             GlobalBestSolution= CurrentSolution;
             GlobalBest= CurrentObjective;
+            
+             if HighestAverage < EvaluateAverageDelay(GlobalBestSolution)
+                 HighestAverage = EvaluateAverageDelay(GlobalBestSolution);
+             end
+            
         end
     end
     fprintf('Iterations: %d\t GlobalBest: %0.8f\n', Iterations, GlobalBest);
-    fprintf('--Average delay %0.8f\n\n',EvaluateAverageDelay(GlobalBestSolution));
+    fprintf('--Average delay %0.8f\n',EvaluateAverageDelay(GlobalBestSolution));
+    fprintf('--Highest avg delay %0.8f\n\n', HighestAverage);
 end
