@@ -15,9 +15,16 @@
 * [guide (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide3/pdf/Guide3_DDR_16_17.pdf)
 * [report portuguese version (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide3/pdf/DDR_work3.pdf)
 
+### Guide 4: Traffic engineering of packet switched networks 
+
+* [guide (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide4/pdf/Guide4DDR_16_17.pdf)
+* [report portuguese version (pdf)](https://github.com/ruipoliveira/ddr-practical-work/blob/master/guide4/pdf/DDR_work4.pdf)
+
+
 
 ### Authors
 
-* Guilherme Cardoso
+* Guilherme Cardoso 
 * Rui Oliveira (ruipedrooliveira@ua.pt)
 
+Year 2017 
