@@ -24,7 +24,7 @@
 
 ### Authors
 
-* Guilherme Cardoso 
+* Guilherme Cardoso (gjc@ua.pt)
 * Rui Oliveira (ruipedrooliveira@ua.pt)
 
 Year 2017 
